@@ -1,12 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
+import { observer } from "mobx-react";
 
-const Header = ({ count, dispatch }) => {
+const Header = observer(({ store }) => {
     return (
         <header style={{ fontSize: "xx-large" }}>
-            <span>Header - Cart count is {count}</span>
-            <button onClick={() => dispatch({ type: "RESET" })}>Clear</button>
+            <span>Header - Cart count is {store.count}</span>
+            <button onClick={() => { store.count = 0 }}>Clear</button>
         </header>
     );
-}
-export default connect((state) => state)(Header);
+});
+export default Header;

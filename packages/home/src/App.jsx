@@ -1,50 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { HOCFederatedWrapper } from "./HOCFederatedWrapper";
-import { createStore } from "redux";
-import { Provider, connect } from "react-redux";
+import { observable } from "mobx";
+import { observer } from "mobx-react";
 
-function cartReducer(state = { count: 0 }, action) {
-    switch (action.type) {
-        case "INCREMENT":
-            return {
-                ...state,
-                count: state.count + 1,
-            };
-        case "RESET":
-            return {
-                ...state,
-                count: 0,
-            };
-        default:
-            return state;
-    }
-}
-const store = createStore(cartReducer);
+const store = observable({
+    count: 0,
+});
 
 import "./index.css";
 
 const Header = HOCFederatedWrapper(React.lazy(() => import("nav/Header")));
 
-const App = connect((state) => state)(({ count, dispatch }) => {
-    const onAddToCart = () => {
-        dispatch({
-            type: "INCREMENT",
-        });
-    };
+const App = observer(({ store }) => {
     return (
         <div>
-            <Header />
+            <Header store={store} />
             <div>Hi there, I'm React from Webpack 5.</div>
-            <button onClick={onAddToCart}>Buy me!</button>
-            <div>Cart count is {count}</div>
+            <button onClick={() => (store.count = store.count + 1)}>Buy me!</button>
+            <div>Cart count is {store.count}</div>
         </div>
     );
 });
 
-ReactDOM.render(
-    <Provider store={store}>
-        <App/>
-    </Provider>,
-    document.getElementById("app")
-);
+ReactDOM.render(<App store={store}/>, document.getElementById("app"));
