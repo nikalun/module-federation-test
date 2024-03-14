@@ -1,0 +1,17 @@
+{
+  "name": "wp5_test",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "wsrun": "^5.2.4"
+  },
+  "scripts": {
+    "start": "concurrently \"wsrun --parallel start\""
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
