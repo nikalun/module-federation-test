@@ -1,10 +1,12 @@
 import React from "react";
-const Header = ({ count, onClear }) => {
+import { connect } from "react-redux";
+
+const Header = ({ count, dispatch }) => {
     return (
         <header style={{ fontSize: "xx-large" }}>
             <span>Header - Cart count is {count}</span>
-            <button onClick={onClear}>Clear</button>
+            <button onClick={() => dispatch({ type: "RESET" })}>Clear</button>
         </header>
     );
 }
-export default Header;
+export default connect((state) => state)(Header);
