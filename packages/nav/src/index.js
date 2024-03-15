@@ -1,12 +1,15 @@
 import React from "react";
-import { observer } from "mobx-react";
 
-const Header = observer(({ store }) => {
+import analyticsBus from "home/analytics";
+import { useSubject } from "home/useSubject";
+
+const Header = ({ count, onClear }) => {
+    const itemCount = useSubject(count, 0);
     return (
         <header style={{ fontSize: "xx-large" }}>
-            <span>Header - Cart count is {store.count}</span>
-            <button onClick={() => { store.count = 0 }}>Clear</button>
+            <span>Header - Cart count is {itemCount}</span>
+            <button onClick={() => {  analyticsBus.next({ type: "onClear" }); onClear();}}>Clear</button>
         </header>
     );
-});
+};
 export default Header;

@@ -44,8 +44,12 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {
         nav: "nav@http://localhost:3001/remoteEntry.js",
+        home: "home@http://localhost:8080/remoteEntry.js"
       },
-      exposes: {},
+      exposes: {
+        "./analytics": "./src/analytics.js",
+        "./useSubject": "./src/useSubject.js"
+      },
       shared: {
         ...deps,
         react: {
@@ -56,13 +60,9 @@ module.exports = {
           singleton: true,
           requiredVersion: deps["react-dom"],
         },
-        "react-redux": {
+        rxjs: {
           singleton: true,
-          requiredVersion: deps["react-redux"],
-        },
-        "redux": {
-          singleton: true,
-          requiredVersion: deps.redux,
+          requiredVersion: deps.rxjs,
         }
       },
     }),

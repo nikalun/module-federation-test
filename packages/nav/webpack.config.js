@@ -42,7 +42,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "nav",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        home: "home@http://localhost:8080/remoteEntry.js"
+      },
       exposes: {
         "./Header": "./src/index"
       },
@@ -56,14 +58,6 @@ module.exports = {
           singleton: true,
           requiredVersion: deps["react-dom"],
         },
-        "react-redux": {
-          singleton: true,
-          requiredVersion: deps["react-redux"],
-        },
-        "redux": {
-          singleton: true,
-          requiredVersion: deps.redux,
-        }
       },
     }),
     new HtmlWebPackPlugin({
