@@ -1,35 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { HOCFederatedWrapper } from "./HOCFederatedWrapper";
-import { useSubject } from "./useSubject";
-import { count } from "./Subject";
-import analyticsBus from "home/analytics";
-
-analyticsBus.subscribe((evt) => {
-    console.log(`analytics: ${JSON.stringify(evt)}`);
-});
-
+import {SingleValue} from "./SingleValue";
+import {sendAnalytics} from "./analytics";
+import {sendAnalytics2, sendAnalytics1} from "./analytics2";
+import { newClassObject } from './exportClass'
+import {GetArray} from "./exportArray";
+import { ObjectValue } from './exportObject'
 import "./index.css";
 
 const Header = HOCFederatedWrapper(React.lazy(() => import("nav/Header")));
 
-const App = () => {
-    const itemCount = useSubject(count, 0);
-    const onAddToCart = () => {
-        const value = itemCount + 1;
-        analyticsBus.next({ type: "addToCart", value });
-        count.next(value);
-    };
-    const onClear = () => {
-        count.next(0);
-    };
 
+const App = () => {
+    sendAnalytics("Rendering");
+    sendAnalytics1('Rendering 1');
+    sendAnalytics2('Rendering 2');
+
+    newClassObject("initial value").then((theObject) => {
+        theObject.logString();
+    });
     return (
         <div>
-            <Header count={count} onClear={onClear} />
+            <ObjectValue />
+            <GetArray />
+            <Header />
+            <SingleValue />
             <div>Hi there, I'm React from Webpack 5.</div>
-            <button onClick={onAddToCart}>Buy me!</button>
-            <div>Cart count is {itemCount}</div>
         </div>
     );
 };

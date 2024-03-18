@@ -1,3 +1,6 @@
-import { Subject } from "rxjs";
-const analyticsBus = new Subject();
-export default analyticsBus;
+const analyticsFunc = import("logic/analyticsFunc");
+export const sendAnalytics = (msg) => {
+    analyticsFunc
+        .then(({ default: analyticsFunc }) => analyticsFunc(msg))
+        .catch((err) => console.log(`Error sending analytics value: ${msg}`));
+};
