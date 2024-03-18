@@ -7,6 +7,7 @@ import {sendAnalytics2, sendAnalytics1} from "./analytics2";
 import { newClassObject } from './exportClass'
 import {GetArray} from "./exportArray";
 import { ObjectValue } from './exportObject'
+import {System} from "./dynamicImport";
 import "./index.css";
 
 const Header = HOCFederatedWrapper(React.lazy(() => import("nav/Header")));
@@ -22,6 +23,7 @@ const App = () => {
     });
     return (
         <div>
+            <System system={{ url: 'http://localhost:8082/remoteEntry.js', scope: 'widget', module: './Widget'}} />
             <ObjectValue />
             <GetArray />
             <Header />
