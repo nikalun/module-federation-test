@@ -1,10 +1,11 @@
 {
   "name": "nav",
   "version": "1.0.1",
+  "main": "./build/index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "build:dev": "webpack --mode development",
-    "build:start": "cd dist && PORT=8080 npx serve",
+    "build": "npm run build:mf && npm run build:npm",
+    "build:mf": "webpack --mode production",
+    "build:npm": "babel src --out-dir build",
     "start": "webpack serve --open --mode development",
     "start:live": "webpack serve --mode development --liveReload",
     "docker:build": "docker build . -t wp5-starter",
@@ -16,6 +17,7 @@
     "email": "jherr@pobox.com"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.3",
     "@babel/core": "7.13.15",
     "@babel/plugin-transform-runtime": "^7.13.15",
     "@babel/preset-env": "^7.13.15",

@@ -1,10 +1,3 @@
-import React from "react";
+import Header from "./Header";
 
-const Header = () => {
-    return (
-        <header style={{ fontSize: "xx-large" }}>
-            <span>Header</span>
-        </header>
-    );
-};
-export default Header;
+export { Header };

@@ -9,6 +9,8 @@
     "wsrun": "^5.2.4"
   },
   "scripts": {
+    "wipe": "rm -rf node_modules packages/**/node_modules",
+    "build": "yarn workspaces run build",
     "start": "concurrently \"wsrun --parallel start\""
   },
   "workspaces": [

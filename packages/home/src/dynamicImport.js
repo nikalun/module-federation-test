@@ -1,7 +1,6 @@
 import React from "react";
 function loadComponent(scope, module) {
     return () => {
-        console.log(window[scope].get(module))
         return window[scope].get(module).then((factory) => {
             const Module = factory();
             return Module;

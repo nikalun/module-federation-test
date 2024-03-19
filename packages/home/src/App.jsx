@@ -9,9 +9,9 @@ import {GetArray} from "./exportArray";
 import { ObjectValue } from './exportObject'
 import {System} from "./dynamicImport";
 import "./index.css";
+import { HeaderWrapper } from "./HeaderWrapper";
 
-const Header = HOCFederatedWrapper(React.lazy(() => import("nav/Header")));
-
+//const Header = HOCFederatedWrapper(React.lazy(() => import("nav/Header")));
 
 const App = () => {
     sendAnalytics("Rendering");
@@ -21,12 +21,14 @@ const App = () => {
     newClassObject("initial value").then((theObject) => {
         theObject.logString();
     });
+
+    console.log(window)
     return (
         <div>
+            <HeaderWrapper />
             <System system={{ url: 'http://localhost:8082/remoteEntry.js', scope: 'widget', module: './Widget'}} />
             <ObjectValue />
             <GetArray />
-            <Header />
             <SingleValue />
             <div>Hi there, I'm React from Webpack 5.</div>
         </div>

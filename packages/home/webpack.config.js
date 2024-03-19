@@ -43,7 +43,7 @@ module.exports = {
       name: "home",
       filename: "remoteEntry.js",
       remotes: {
-        nav: "nav@http://localhost:3001/remoteEntry.js",
+        "mf-nav": "nav@http://localhost:3001/remoteEntry.js",
         logic: "logic@http://localhost:8081/remoteEntry.js",
         widget: "widget@http://localhost:8082/remoteEntry.js",
       },
